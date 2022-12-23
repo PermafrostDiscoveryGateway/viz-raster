@@ -176,54 +176,63 @@ class RasterTiler():
             morecantile.Tile or None
                 The tile that was rasterized or None if there was an error.
         """
+        # if first rasterization attempt fails, try again
+        for attempt in range(1):
+            try:
 
-        try:
+                # Get information about the tile from the path
+                tile = self.tiles.tile_from_path(path)
+                out_path = self.tiles.path_from_tile(tile, 'geotiff')
 
-            # Get information about the tile from the path
-            tile = self.tiles.tile_from_path(path)
-            out_path = self.tiles.path_from_tile(tile, 'geotiff')
+                if os.path.isfile(out_path) and not overwrite:
+                    logger.info(f'Skip rasterizing {path} for tile {tile}.'
+                                ' Tile already exists.')
+                    return None
 
-            if os.path.isfile(out_path) and not overwrite:
-                logger.info(f'Skip rasterizing {path} for tile {tile}.'
-                            ' Tile already exists.')
-                return None
+                bounds = self.tiles.get_bounding_box(tile)
 
-            bounds = self.tiles.get_bounding_box(tile)
+                # Track and log the event
+                id = self.__start_tracking('geotiffs_from_vectors')
+                logger.info(f'Rasterizing {path} for tile {tile} to {out_path}.')
 
-            # Track and log the event
-            id = self.__start_tracking('geotiffs_from_vectors')
-            logger.info(f'Rasterizing {path} for tile {tile} to {out_path}.')
+                gdf = gpd.read_file(path)
 
-            gdf = gpd.read_file(path)
+                # Check if deduplication should be performed first
+                dedup_here = self.config.deduplicate_at('raster')
+                dedup_method = self.config.get_deduplication_method()
+                if dedup_here and dedup_method is not None:
+                    prop_duplicated = self.config.polygon_prop('duplicated')
+                    if prop_duplicated in gdf.columns:
+                        gdf = gdf[~gdf[prop_duplicated]]
 
-            # Check if deduplication should be performed first
-            dedup_here = self.config.deduplicate_at('raster')
-            dedup_method = self.config.get_deduplication_method()
-            if dedup_here and dedup_method is not None:
-                prop_duplicated = self.config.polygon_prop('duplicated')
-                if prop_duplicated in gdf.columns:
-                    gdf = gdf[~gdf[prop_duplicated]]
+                # Get properties to pass to the rasterizer
+                raster_opts = self.config.get_raster_config()
 
-            # Get properties to pass to the rasterizer
-            raster_opts = self.config.get_raster_config()
+                # Rasterize
+                raster = Raster.from_vector(
+                    vector=gdf, bounds=bounds, **raster_opts)
+                raster.write(out_path)
 
-            # Rasterize
-            raster = Raster.from_vector(
-                vector=gdf, bounds=bounds, **raster_opts)
-            raster.write(out_path)
+                # Track and log the end of the event
+                message = f'Rasterization for tile {tile} complete.'
+                self.__end_tracking(id, raster=raster, tile=tile, message=message)
+                logger.info(
+                    f'Complete rasterization of tile {tile} to {out_path}.')
 
-            # Track and log the end of the event
-            message = f'Rasterization for tile {tile} complete.'
-            self.__end_tracking(id, raster=raster, tile=tile, message=message)
-            logger.info(
-                f'Complete rasterization of tile {tile} to {out_path}.')
+                return tile
 
-            return tile
+            except Exception as e:
+                logger.info(f'Error rasterizing {path} for tile {tile}'
+                            f' on first try due to Error:\t\n{e}, trying again.')
 
-        except Exception as e:
-            message = f'Error rasterizing {path} for tile {tile}.'
-            self.__end_tracking(id, tile=tile, error=e, message=message)
+            else:
+                break
+                
+        else:
+            message = f'Error rasterizing {path} for tile {tile} on second try.'
+            self.__end_tracking(id, tile=tile, message=message)
             return None
+
 
     def parent_geotiffs_from_children(
             self, tiles, recursive=True, overwrite=True):
