@@ -1,7 +1,6 @@
 import time
 import uuid
-import logging
-from . import logging_config
+from logging import getLogger
 import os
 
 import geopandas as gpd
@@ -12,7 +11,7 @@ from . import Raster
 from . import Palette
 from . import WebImage
 
-logger = logging_config.logger
+logger = getLogger(__name__).logger
 
 
 class RasterTiler():

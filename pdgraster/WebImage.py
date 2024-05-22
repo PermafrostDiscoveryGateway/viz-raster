@@ -7,10 +7,10 @@ from . import Palette
 
 import time
 import uuid
-import logging
-from . import logging_config
+from logging import getLogger
 import os
-logger = logging_config.logger
+
+logger = getLogger(__name__).logger
 
 
 class WebImage():
