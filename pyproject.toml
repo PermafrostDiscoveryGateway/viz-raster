@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pdgraster"
 version = "0.9.2"
-description = "Geospatial data rasterization workflow"
+description = "Rasterization to GeoTiff and web-based tiles for the PDG Visualization pipeline"
 authors = [
     "Robyn Thiessen-Bock <thiessenbock@nceas.ucsb.edu>",
     "Juliet Cohen <jcohen@nceas.ucsb.edu>",
@@ -32,6 +32,7 @@ colormaps = "== 0.4.0"
 Pillow = ">= 9, < 10"
 rasterio = ">= 1.2, < 2"
 pydantic = "1.10.9"
+pdgstaging = { git="https://github.com/PermafrostDiscoveryGateway/viz-staging.git" }
 
 [tool.poetry.group.dev.dependencies]
 pytest = ">=7"
