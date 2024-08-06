@@ -526,12 +526,17 @@ class Raster():
             if prop in self.__prop_keywords:
                 prop = self.__props[self.__prop_keywords[prop]]
             method = stat['aggregation_method']
-            agg_tuple = (prop, method)
             agg_name = stat['name']
-            if stat['weight_by'] == 'count':
+            if method == 'bounded_count':
+                agg_tuple = (prop, lambda x, bounds=stat['bounds'] :
+                    self.__count_within_bucket__(x, bounds[0], bounds[1]))
                 agg_dict_count[agg_name] = agg_tuple
-            elif stat['weight_by'] == 'area':
-                agg_dict_area[agg_name] = agg_tuple
+            else:
+                agg_tuple = (prop, method)
+                if stat['weight_by'] == 'count':
+                    agg_dict_count[agg_name] = agg_tuple
+                elif stat['weight_by'] == 'area':
+                    agg_dict_area[agg_name] = agg_tuple
 
         if(len(agg_dict_count) > 0):
             # Create a dataframe with the row and column indices are assigned
@@ -564,6 +569,14 @@ class Raster():
                 stats_df.fillna(0, inplace=True)
 
         self.stats_df = stats_df
+
+    @staticmethod
+    def __count_within_bucket__(series, lb, ub):
+        count = 0
+        for value in series:
+            if (lb == None or value > lb) and (ub == None or value <= ub):
+                count += 1
+        return count
 
     def __grid_by_centroid(self):
         """
