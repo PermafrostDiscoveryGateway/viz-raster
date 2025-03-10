@@ -542,7 +542,7 @@ class RasterTiler():
         """
         events_path = self.config.get('filename_rasterization_events')
         if events_path is not None:
-            summary = pd.read_csv(events_path)
+            summary = pd.read_parquet(events_path)
             return summary
         else:
             return None
@@ -550,7 +550,7 @@ class RasterTiler():
     def get_rasters_summary(self):
         summary_path = self.config.get('filename_rasters_summary')
         if summary_path is not None:
-            summary = pd.read_csv(summary_path)
+            summary = pd.read_parquet(summary_path)
             return summary
         else:
             return None
@@ -625,6 +625,7 @@ class RasterTiler():
         # do not pull in variable id bc cannot get it working with ray
         event_type = "event_type_replacement"
         start_time = "start_time_replacement"
+        id = self.__start_tracking('geotiffs_from_vectors', message=message)
 
         event = {
             'id': id,
@@ -669,28 +670,29 @@ class RasterTiler():
 
             summary_path = self.config.get('filename_rasters_summary')
             raster_info = pd.DataFrame(raster_info)
-            self.__append_to_csv(summary_path, raster_info)
+            self.__append_to_parquet(summary_path, raster_info)
 
         # Save the event as a row in the summary CSV
         events_path = self.config.get('filename_rasterization_events')
         event = pd.DataFrame(event, index=[0])
-        self.__append_to_csv(events_path, event)
+        self.__append_to_parquet(events_path, event)
 
-    def __append_to_csv(self, path, data):
+    def __append_to_parquet(self, path, data):
         """
-            Add data from a dataframe to a CSV file. If the CSV doesn't exist
-            yet, create it along with the column header row.
+        Add data from a DataFrame to a Parquet file. If the Parquet file doesn't exist
+        yet, create it using the provided data.
 
-            Parameters
-            ----------
-            path : str
-                The path to the CSV file.
-            data : pandas.DataFrame
-                The data to add to the CSV.
+        Parameters
+        ----------
+        path : str
+            The path to the Parquet file.
+        data : pandas.DataFrame
+            The data to add to the Parquet file.
         """
-        header = False
-        mode = 'a'
-        if not os.path.isfile(path):
-            header = True
-            mode = 'w'
-        data.to_csv(path, mode=mode, index=False, header=header)
+        if os.path.isfile(path):
+            # Read existing data and append new data
+            existing_data = pd.read_parquet(path)
+            data = pd.concat([existing_data, data], ignore_index=True)
+        
+        # Write the combined data back to the Parquet file
+        data.to_parquet(path, index=False)
