@@ -5,13 +5,10 @@ import numpy as np
 
 from . import Palette
 
-import time
-import uuid
 import logging
-from . import logging_config
 import os
 
-logger = logging_config.logger
+logger = logging.getLogger(__name__)
 
 
 class WebImage:
