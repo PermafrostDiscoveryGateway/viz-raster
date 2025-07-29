@@ -107,14 +107,21 @@ class WebImage:
         # set the nodata value to np.nan
         if len(no_data_mask):
             image_data[no_data_mask] = np.nan
-        # convert the array from min to max to 0 to 255, and set the nodata
-        # values 256. Values < min_val will be set to min_val. Values > max_val
-        # will be set to max_val.
-        image_data[image_data < min_val] = min_val
-        image_data[image_data > max_val] = max_val
-        image_data_scaled = (image_data - min_val) * (255 / (max_val - min_val))
-        image_data_scaled[no_data_mask] = 256
-        image_data_scaled = image_data_scaled.astype(int)
+
+        # Handle case where min_val equals max_val to avoid division by zero
+        if max_val == min_val:
+            # All values are the same, set them all to middle of color range (127)
+            image_data_scaled = np.full_like(image_data, 127, dtype=int)
+            image_data_scaled[no_data_mask] = 256
+        else:
+            # convert the array from min to max to 0 to 255, and set the nodata
+            # values 256. Values < min_val will be set to min_val. Values > max_val
+            # will be set to max_val.
+            image_data[image_data < min_val] = min_val
+            image_data[image_data > max_val] = max_val
+            image_data_scaled = (image_data - min_val) * (255 / (max_val - min_val))
+            image_data_scaled[no_data_mask] = 256
+            image_data_scaled = image_data_scaled.astype(int)
 
         # replace each value in the matrix with the corresponding color in the
         # list of rgba values. palette. The list consists of 256 RGBA values,
