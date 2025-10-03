@@ -456,8 +456,9 @@ class Raster:
 
         # Check that the geometry column is a Polygon.
         if not gdf.geometry.geom_type.isin(["Polygon", "MultiPolygon"]).all():
-            raise ValueError("The vector file must comprise only Polygon or MultiPolygon geometries.")
-
+            raise ValueError(
+                "The vector file must comprise only Polygon or MultiPolygon geometries."
+            )
 
         # Check that the centroid columns exist in the data frame, otherwise
         # set these column names to None (and compute them later)
