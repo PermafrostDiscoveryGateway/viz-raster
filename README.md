@@ -1,12 +1,12 @@
 # Viz-raster: raster data processing for geospatial visualization
 
-- **Authors**: Robyn Thiessen-Bock ; Juliet Cohen ; Matthew B. Jones ; Lauren Walker
-- **DOI**: [10.18739/A22Z12R4F](https://ezid.cdlib.org/id/doi:10.18739/A22Z12R4F)
+- **Authors**:Robyn Thiessen-Bock ; Juliet Cohen ; Matthew B. Jones ; Kastan Day ; Lauren Walker; Rushiraj Nenuji; Alyona Kosobokova
+- **DOI**: [10.18739/A2GF0MZ4X](https://ezid.cdlib.org/id/doi:10.18739/A2GF0MZ4X)
 - **License**: [Apache 2](https://opensource.org/license/apache-2-0/)
 - [Package source code on GitHub](https://github.com/PermafrostDiscoveryGateway/viz-raster)
 - [Submit bugs and feature requests](https://github.com/PermafrostDiscoveryGateway/viz-raster/issues/new)
 
-Converts pre-tiled vector output from from the [PDG
+Converts pre-tiled vector output from the [PDG
 viz-staging](https://github.com/PermafrostDiscoveryGateway/viz-staging) step
 into a series of GeoTIFFs and web-ready image tiles at a range of zoom levels.
 View the content under `example` to see the type of output produced. Most parts
@@ -20,7 +20,7 @@ documentation in `ConfigManager.py` for more details.
 
 Cite this software as:
 
-> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker. 2023. Viz-raster: raster data processing for geospatial visualization (version 0.9.3). Arctic Data Center. doi: 10.18739/A22Z12R4F
+> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker, Rushiraj Nenuji, Alyona Kosobokova. 2025. Viz-raster: raster data processing for geospatial visualization (version 1.0.0). Arctic Data Center. doi: 10.18739/A2GF0MZ4X
 
 ## Install
 
