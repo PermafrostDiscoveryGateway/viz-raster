@@ -114,21 +114,6 @@ The development dependencies include:
 - `black >= 24.1.1` - for code formatting
 - `pre-commit >= 3.5.0` - for pre-commit hooks
 
-## Usage
-
-1. Create a config JSON file for the raster job, see [PDG-Staging docs](https://github.com/PermafrostDiscoveryGateway/viz-staging/blob/develop//docs/config.md) for details,  `help(pdgstaging.ConfigManager)` for all configuration options, and `pdgstaging.ConfigManager.defaults` for default config values.
-
-**From the command line:**
-- run: `python -m pdgraster -c '/path/to/config.json'`
-
-**In python:**
-
-```python
-import pdgraster
-# See example/main.py for a complete example
-```
-
-See more example code in [`example/main.py`](example/main.py) and [`PermafrostDiscoveryGateway/viz-info/helpful-code`](https://github.com/PermafrostDiscoveryGateway/viz-info/tree/main/helpful-code)
 
 ## Raster data processing for the PDG tiling pipeline
 
