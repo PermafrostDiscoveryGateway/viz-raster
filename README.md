@@ -1,12 +1,12 @@
 # Viz-raster: raster data processing for geospatial visualization
 
-- **Authors**: Robyn Thiessen-Bock ; Juliet Cohen ; Matthew B. Jones ; Lauren Walker
-- **DOI**: [10.18739/A22Z12R4F](https://ezid.cdlib.org/id/doi:10.18739/A22Z12R4F)
+- **Authors**:Robyn Thiessen-Bock ; Juliet Cohen ; Matthew B. Jones ; Kastan Day ; Lauren Walker; Rushiraj Nenuji; Alyona Kosobokova
+- **DOI**: [10.18739/A2GF0MZ4X](https://ezid.cdlib.org/id/doi:10.18739/A2GF0MZ4X)
 - **License**: [Apache 2](https://opensource.org/license/apache-2-0/)
 - [Package source code on GitHub](https://github.com/PermafrostDiscoveryGateway/viz-raster)
 - [Submit bugs and feature requests](https://github.com/PermafrostDiscoveryGateway/viz-raster/issues/new)
 
-Converts pre-tiled vector output from from the [PDG
+Converts pre-tiled vector output from the [PDG
 viz-staging](https://github.com/PermafrostDiscoveryGateway/viz-staging) step
 into a series of GeoTIFFs and web-ready image tiles at a range of zoom levels.
 View the content under `example` to see the type of output produced. Most parts
@@ -20,7 +20,7 @@ documentation in `ConfigManager.py` for more details.
 
 Cite this software as:
 
-> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker. 2023. Viz-raster: raster data processing for geospatial visualization (version 0.9.3). Arctic Data Center. doi: 10.18739/A22Z12R4F
+> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker, Rushiraj Nenuji, Alyona Kosobokova. 2025. Viz-raster: raster data processing for geospatial visualization (version 1.0.0). Arctic Data Center. doi: 10.18739/A2GF0MZ4X
 
 ## Install
 
@@ -114,21 +114,6 @@ The development dependencies include:
 - `black >= 24.1.1` - for code formatting
 - `pre-commit >= 3.5.0` - for pre-commit hooks
 
-## Usage
-
-1. Create a config JSON file for the raster job, see [PDG-Staging docs](https://github.com/PermafrostDiscoveryGateway/viz-staging/blob/develop//docs/config.md) for details,  `help(pdgstaging.ConfigManager)` for all configuration options, and `pdgstaging.ConfigManager.defaults` for default config values.
-
-**From the command line:**
-- run: `python -m pdgraster -c '/path/to/config.json'`
-
-**In python:**
-
-```python
-import pdgraster
-# See example/main.py for a complete example
-```
-
-See more example code in [`example/main.py`](example/main.py) and [`PermafrostDiscoveryGateway/viz-info/helpful-code`](https://github.com/PermafrostDiscoveryGateway/viz-info/tree/main/helpful-code)
 
 ## Raster data processing for the PDG tiling pipeline
 
