@@ -1,12 +1,14 @@
 [tool.poetry]
 name = "pdgraster"
-version = "0.9.3"
+version = "1.0.0"
 description = "Geospatial data rasterization workflow"
 authors = [
     "Robyn Thiessen-Bock <thiessenbock@nceas.ucsb.edu>",
     "Juliet Cohen <jcohen@nceas.ucsb.edu>",
     "Lauren Walker <walker@nceas.ucsb.edu>",
     "Matthew B. Jones <jones@nceas.ucsb.edu>",
+    "Rushiraj Nenuji <nenuji@nceas.ucsb.edu>",
+    "Alyona Kosobokova <alyonak@nceas.ucsb.edu>"
 ]
 license = 'Apache Software License 2.0'
 readme = "README.md"
