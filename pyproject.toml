@@ -8,7 +8,7 @@ authors = [
     {name = "Lauren Walker", email = "walker@nceas.ucsb.edu"},
     {name = "Matthew B. Jones", email = "jones@nceas.ucsb.edu"},
     {name = "Rushiraj Nenuji", email = "nenuji@nceas.ucsb.edu"},
-    {name = "Alyona Kosobokova", email = "alyonak@nceas.ucsb.edu"},    
+    {name = "Alyona Kosobokova", email = "alyonak@nceas.ucsb.edu"}  
 ]
 license = {text = "Apache Software License 2.0"}
 readme = "README.md"
