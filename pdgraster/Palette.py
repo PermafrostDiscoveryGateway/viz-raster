@@ -140,13 +140,12 @@ class Palette:
         """
 
         cols = self.colors
-
+        
         if isinstance(cols, list):
 
             # The Palette is faster if we only create the coloraide method once
-            self.__coloraide_method__ = Color(cols[0]).interpolate(
-                cols[1:], space="lch"
-            )
+            self.__coloraide_method__ = Color.interpolate(cols, space="lch")
+            #self.__coloraide_method__ = Color(cols[0]).interpolate([cols[0], *cols[1:]], space="lch")
 
             def _get_color(val):
                 col_obj = self.__coloraide_method__(val)
