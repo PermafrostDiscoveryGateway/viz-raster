@@ -261,7 +261,7 @@ class Raster:
         raster = None
         try:
             raster = r.__merge_and_resample(rasters, resampling_methods)
-            r.update_properties(raster) 
+            r.update_properties(raster)
         finally:
             for ds in rasters:
                 try:

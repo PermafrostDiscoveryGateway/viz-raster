@@ -1,6 +1,7 @@
 import numpy as np
 from pdgraster import WebImage
 
+
 def test_webimage_save_png_with_safe_palette(tmp_path):
     data = np.arange(16, dtype=float).reshape(4, 4)
     wi = WebImage(

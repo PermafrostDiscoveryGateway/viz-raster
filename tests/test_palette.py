@@ -1,8 +1,10 @@
 from pdgraster.Palette import Palette
 
+
 def test_palette_rgba_table_len_257_with_explicit_colors():
     pal = Palette(["#000000", "#808080", "#ffffff"], "#00000000")
     assert len(pal.rgba_list) == 257
+
 
 def test_palette_get_color_shapes():
     pal = Palette(["#000000", "#808080", "#ffffff"], "#00000000")
