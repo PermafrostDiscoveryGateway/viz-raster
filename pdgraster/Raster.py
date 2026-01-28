@@ -252,16 +252,27 @@ class Raster:
             when finished with the raster, it should be closed using
             `raster.close()`.
         """
-
         r = cls()
-
         r.shape = shape
         r.bounds = bounds
 
         rasters = r.__get_and_check_rasters(rasters)
-        raster = r.__merge_and_resample(rasters, resampling_methods)
 
-        r.update_properties(raster)
+        raster = None
+        try:
+            raster = r.__merge_and_resample(rasters, resampling_methods)
+            r.update_properties(raster) 
+        finally:
+            for ds in rasters:
+                try:
+                    ds.close()
+                except Exception:
+                    pass
+            if raster is not None:
+                try:
+                    raster.close()
+                except Exception:
+                    pass
 
         return r
 
