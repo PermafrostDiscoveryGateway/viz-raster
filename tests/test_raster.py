@@ -1,7 +1,8 @@
 import numpy as np
 import rasterio
 from rasterio.transform import from_bounds
-from pdgraster.Raster import Raster 
+from pdgraster.Raster import Raster
+
 
 def _make_tif(path, arr, *, bounds=(0, 0, 3, 3), crs=None, descs=("a", "b")):
     h, w = arr.shape[1], arr.shape[2]
@@ -21,11 +22,11 @@ def _make_tif(path, arr, *, bounds=(0, 0, 3, 3), crs=None, descs=("a", "b")):
 
 
 def test_from_file_and_summary(tmp_path):
-   # Smoke test: Raster.from_file reads data and computes summary stats.
+    # Smoke test: Raster.from_file reads data and computes summary stats.
     arr = np.stack(
         [
             np.arange(9, dtype=np.uint8).reshape(3, 3),  # band 0: 0..8
-            np.full((3, 3), 5, dtype=np.uint8),          # band 1: all 5s
+            np.full((3, 3), 5, dtype=np.uint8),  # band 1: all 5s
         ]
     )
     p = tmp_path / "known.tif"
@@ -45,9 +46,9 @@ def test_from_file_and_summary(tmp_path):
 
 
 def test_from_rasters_merge_and_resample(tmp_path):
-   #  Merge and resample two small rasters.
+    #  Merge and resample two small rasters.
     a1 = np.zeros((2, 16, 16), dtype=np.uint8)
-    a2 = np.ones((2, 16, 16), dtype=np.uint8)  
+    a2 = np.ones((2, 16, 16), dtype=np.uint8)
     p1 = tmp_path / "a.tif"
     p2 = tmp_path / "b.tif"
 
