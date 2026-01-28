@@ -129,8 +129,8 @@ class Palette:
                 "To see how to format a color string, see: "
                 "https://facelessuser.github.io/coloraide/color/."
             )
+    
         return nodata_color
-        return _get_col
     
     def create_get_color_method(self):
          """
