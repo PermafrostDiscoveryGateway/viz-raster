@@ -130,34 +130,39 @@ class Palette:
                 "https://facelessuser.github.io/coloraide/color/."
             )
         return nodata_color
-
+        return _get_col
+    
     def create_get_color_method(self):
-        """
+         """
         Create a function that takes a value between 0 and 1 and returns a
         tuple of RGBA values (0-255) for the corresponding color. This
         method does not check that the value is between 0 and 1, and will
         not return the nodata color.
         """
+         cols = self.colors
+         
+         if isinstance(cols, list):
+            if len(cols) == 1:
+                cols = [cols[0], cols[0]]
+            try:
+                interp = Color.interpolate(cols, space="lch")
+                def _get_color(val):
+                    return self.__coloraide_to_rgba__(interp(val))
+            except TypeError:
+                interp = Color(cols[0]).interpolate(cols[1:], space="lch")
+                def _get_color(val):
+                    return self.__coloraide_to_rgba__(interp(val))
 
-        cols = self.colors
-        
-        if isinstance(cols, list):
+            self.__coloraide_method__ = interp
+            return _get_color
 
-            # The Palette is faster if we only create the coloraide method once
-            self.__coloraide_method__ = Color.interpolate(cols, space="lch")
-            #self.__coloraide_method__ = Color(cols[0]).interpolate([cols[0], *cols[1:]], space="lch")
-
-            def _get_color(val):
-                col_obj = self.__coloraide_method__(val)
-                return self.__coloraide_to_rgba__(col_obj)
-
-        elif isinstance(cols, Colormap):
+         elif isinstance(cols, Colormap):
 
             def _get_color(val):
                 val = float(val)
                 return self.colors.__call__(val, bytes=True)
 
-        return _get_color
+         return _get_color
 
     def get_color(self, val, type="rgba"):
         """
