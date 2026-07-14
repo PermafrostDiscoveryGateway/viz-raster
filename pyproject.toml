@@ -1,6 +1,6 @@
 [project]
 name = "pdgraster"
-version = "1.0.0"
+version = "1.1.0"
 description = "Geospatial data rasterization workflow"
 authors = [
     {name = "Robyn Thiessen-Bock", email = "thiessenbock@nceas.ucsb.edu"},
@@ -8,24 +8,24 @@ authors = [
     {name = "Lauren Walker", email = "walker@nceas.ucsb.edu"},
     {name = "Matthew B. Jones", email = "jones@nceas.ucsb.edu"},
     {name = "Rushiraj Nenuji", email = "nenuji@nceas.ucsb.edu"},
-    {name = "Alyona Kosobokova", email = "alyonak@nceas.ucsb.edu"}  
+    {name = "Alyona Kosobokova", email = "alyonak@nceas.ucsb.edu"}
 ]
 license = {text = "Apache Software License 2.0"}
 readme = "README.md"
-requires-python = ">= 3.9, < 3.10"
+requires-python = ">= 3.11"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: Apache Software License",
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
     "numpy >= 1.21, < 3.0",
     "shapely >= 2, < 3.0",
     "geopandas >= 0.12.2, < 1.0",
-    "coloraide >= 0.10, < 2.0",
+    "coloraide >= 0.10, < 1",
     "colormaps == 0.4.0",
     "Pillow >= 9",
     "rasterio >= 1.3.8, < 2.0",
@@ -47,5 +47,5 @@ build-backend = "hatchling.build"
 
 [tool.black]
 line-length = 88
-target-version = ["py39"]
+target-version = ["py311"]
 include = "\\.pyi?$"
