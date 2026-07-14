@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python:3.11-slim
 
 # Install transitive dependencies and build tools
 RUN apt-get update \
@@ -9,7 +9,7 @@ RUN apt-get update \
 RUN pip install uv
 
 # Install pdgraster from GitHub repo using uv
-RUN uv pip install --system git+https://github.com/PermafrostDiscoveryGateway/viz-raster.git@feature-raster-k8s
+RUN uv pip install --system git+https://github.com/PermafrostDiscoveryGateway/viz-raster.git@main
 
 WORKDIR /app
 

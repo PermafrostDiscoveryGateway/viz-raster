@@ -1,14 +1,13 @@
 # Viz-raster: raster data processing for geospatial visualization
 
-- **Authors**:Robyn Thiessen-Bock ; Juliet Cohen ; Matthew B. Jones ; Kastan Day ; Lauren Walker; Rushiraj Nenuji; Alyona Kosobokova
-- **DOI**: [10.18739/A2GF0MZ4X](https://ezid.cdlib.org/id/doi:10.18739/A2GF0MZ4X)
+- **Authors**:Robyn Thiessen-Bock; Juliet Cohen; Matthew B. Jones; Kastan Day; Lauren Walker; Rushiraj Nenuji; Alyona Kosobokova
+- **DOI**: [10.18739/A2RF5KJ0K](https://ezid.cdlib.org/id/doi:10.18739/A2RF5KJ0K)
 - **License**: [Apache 2](https://opensource.org/license/apache-2-0/)
 - [Package source code on GitHub](https://github.com/PermafrostDiscoveryGateway/viz-raster)
 - [Submit bugs and feature requests](https://github.com/PermafrostDiscoveryGateway/viz-raster/issues/new)
 
-Converts pre-tiled vector output from the [PDG
-viz-staging](https://github.com/PermafrostDiscoveryGateway/viz-staging) step
-into a series of GeoTIFFs and web-ready image tiles at a range of zoom levels.
+Converts pre-tiled vector input supplied by the PDG workflow into a series of
+GeoTIFFs and web-ready image tiles at a range of zoom levels.
 View the content under `example` to see the type of output produced. Most parts
 of the process are configurable, including the methods used to summarize vector
 data into rasters, the color palette, and the size of the tiles. See the
@@ -20,16 +19,16 @@ documentation in `ConfigManager.py` for more details.
 
 Cite this software as:
 
-> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker, Rushiraj Nenuji, Alyona Kosobokova. 2025. Viz-raster: raster data processing for geospatial visualization (version 1.0.0). Arctic Data Center. doi: 10.18739/A2GF0MZ4X
+> Robyn Thiessen-Bock, Juliet Cohen, Matt Jones, Lauren Walker, Rushiraj Nenuji, Alyona Kosobokova. 2026. Viz-raster: raster data processing for geospatial visualization (version 1.1.0). Arctic Data Center. doi:10.18739/A2RF5KJ0K
 
 ## Install
 
-Requires Python version `3.9` or `3.10` and `libspatialindex` or `libspatialindex-dev`
+Requires Python version `3.11` or `3.12` and `libspatialindex` or `libspatialindex-dev`
 
 ### Prerequisites
 
 1. Follow the instructions to install [`libspatialindex`](https://libspatialindex.org/en/latest/) or [`libspatialindex-dev`](https://packages.ubuntu.com/bionic/libspatialindex-dev)
-2. Make sure that Python version 3.9 or 3.10 is installed (try `which python3.9`).
+2. Make sure that Python version 3.11 or 3.12 is installed (try `which python3.11` or `which python3.12`).
 
 ### Installation Options
 
@@ -63,7 +62,7 @@ If you prefer to use a virtual environment:
 
 ```bash
 # Create and activate a virtual environment
-python3.9 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate  # On macOS/Linux
 # or
 venv\Scripts\activate     # On Windows
@@ -93,12 +92,12 @@ source .venv/bin/activate
 uv pip install -e ".[dev]"
 
 # Option 2: Using uv with custom virtual environment
-python3.9 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate
 uv pip install -e ".[dev]"
 
 # Option 3: Using pip with virtual environment
-python3.9 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate
 pip install -e ".[dev]"
 
@@ -117,7 +116,7 @@ The development dependencies include:
 
 ## Raster data processing for the PDG tiling pipeline
 
-This repository contains code that converts pre-tiled vector output from the [PDG viz-staging](https://github.com/PermafrostDiscoveryGateway/viz-staging) step into a series of GeoTIFFs and web-ready image tiles at a range of zoom levels for the [Permafrost Discovery Gateway](https://permafrost.arcticdata.io/) (PDG) workflow. The rasterization process:
+This repository contains code that converts pre-tiled vector input supplied by the [Permafrost Discovery Gateway](https://permafrost.arcticdata.io/) (PDG) workflow into a series of GeoTIFFs and web-ready image tiles at a range of zoom levels. The rasterization process:
 
 1. Takes staged vector tiles as input
 2. Converts vector data to raster format using configurable summarization methods

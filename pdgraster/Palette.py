@@ -129,6 +129,7 @@ class Palette:
                 "To see how to format a color string, see: "
                 "https://facelessuser.github.io/coloraide/color/."
             )
+
         return nodata_color
 
     def create_get_color_method(self):
@@ -138,19 +139,22 @@ class Palette:
         method does not check that the value is between 0 and 1, and will
         not return the nodata color.
         """
-
         cols = self.colors
 
         if isinstance(cols, list):
+            if len(cols) == 1:
+                cols = [cols[0], cols[0]]
+            try:
+                interp = Color.interpolate(cols, space="lch")
+            except TypeError:
+                interp = Color(cols[0]).interpolate(cols[1:], space="lch")
 
-            # The Palette is faster if we only create the coloraide method once
-            self.__coloraide_method__ = Color(cols[0]).interpolate(
-                cols[1:], space="lch"
-            )
+            self.__coloraide_method__ = interp
 
             def _get_color(val):
-                col_obj = self.__coloraide_method__(val)
-                return self.__coloraide_to_rgba__(col_obj)
+                return self.__coloraide_to_rgba__(interp(val))
+
+            return _get_color
 
         elif isinstance(cols, Colormap):
 
