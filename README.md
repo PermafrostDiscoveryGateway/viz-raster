@@ -23,12 +23,12 @@ Cite this software as:
 
 ## Install
 
-Requires Python version `3.11` and `libspatialindex` or `libspatialindex-dev`
+Requires Python version `3.11` or `3.12` and `libspatialindex` or `libspatialindex-dev`
 
 ### Prerequisites
 
 1. Follow the instructions to install [`libspatialindex`](https://libspatialindex.org/en/latest/) or [`libspatialindex-dev`](https://packages.ubuntu.com/bionic/libspatialindex-dev)
-2. Make sure that Python version 3.11 is installed (try `which python3.11`).
+2. Make sure that Python version 3.11 or 3.12 is installed (try `which python3.11` or `which python3.12`).
 
 ### Installation Options
 
@@ -62,7 +62,7 @@ If you prefer to use a virtual environment:
 
 ```bash
 # Create and activate a virtual environment
-python3.11 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate  # On macOS/Linux
 # or
 venv\Scripts\activate     # On Windows
@@ -92,12 +92,12 @@ source .venv/bin/activate
 uv pip install -e ".[dev]"
 
 # Option 2: Using uv with custom virtual environment
-python3.11 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate
 uv pip install -e ".[dev]"
 
 # Option 3: Using pip with virtual environment
-python3.11 -m venv venv
+python3.11 -m venv venv  # Or use python3.12
 source venv/bin/activate
 pip install -e ".[dev]"
 

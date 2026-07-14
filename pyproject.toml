@@ -20,6 +20,7 @@ classifiers = [
     "Natural Language :: English",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
     "numpy >= 1.21, < 3.0",
@@ -48,5 +49,5 @@ build-backend = "hatchling.build"
 
 [tool.black]
 line-length = 88
-target-version = ["py311"]
+target-version = ["py311", "py312"]
 include = "\\.pyi?$"
