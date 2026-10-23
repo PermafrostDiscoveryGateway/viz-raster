@@ -5,7 +5,9 @@ import numpy as np
 import rasterio
 from PIL import Image
 
+from .Palette import Palette
 from .Raster import Raster
+from .WebImage import WebImage
 
 
 def _temp_sibling(output):
@@ -247,10 +249,6 @@ def calculate_ranges(raster_paths):
             raise ValueError(f"band {index} has no valid samples")
         ranges.append((low, high))
     return ranges
-
-
-from .Palette import Palette
-from .WebImage import WebImage
 
 
 def render_web_tile(
