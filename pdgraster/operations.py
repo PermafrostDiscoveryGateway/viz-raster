@@ -1,3 +1,9 @@
+"""Explicit raster operations over named input and output files.
+
+Each function writes through a temporary sibling file, validates it, and
+renames it into place, so a failed call never leaves a partial output.
+"""
+
 import math
 from pathlib import Path
 
