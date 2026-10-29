@@ -130,6 +130,38 @@ The process is highly configurable, allowing customization of:
 - Tile sizes and zoom level ranges
 - Output formats and quality settings
 
+## Operations
+
+Each function writes through a temporary sibling file, validates it by
+re-reading, then renames it into place. `overwrite=False` (the default)
+reuses existing valid output; `overwrite=True` regenerates it.
+
+```python
+from pdgraster import (
+    calculate_ranges,
+    compose_parent,
+    rasterize_tile,
+    render_web_tile,
+)
+
+rasterize_tile("tile.gpkg", "tile.tif", bounds={...}, shape=(256, 256),
+               centroid_properties=None, statistics=[...])
+compose_parent(["a.tif"], "parent.tif", bounds={...}, shape=(256, 256),
+               resampling="nearest")
+calculate_ranges(["a.tif", "b.tif"])  # [(min, max), ...] per band
+render_web_tile("tile.tif", "tile.png", band=1, value_range=(0, 9),
+                palette=(["#000000", "#ffffff"], "#00000000"), nodata=None)
+```
+
+Direct subcommands are also available:
+
+```bash
+python -m pdgraster calculate-ranges a.tif b.tif
+python -m pdgraster render-web-tile tile.tif tile.png --band 1 \
+  --value-range '[0, 9]' --palette '[["#000000", "#ffffff"], "#00000000"]' \
+  --nodata null
+```
+
 ## Development
 
 Build and test using standard Python tools.
